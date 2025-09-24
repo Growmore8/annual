@@ -27,14 +27,7 @@
     .performers h2{margin:0 0 12px;font-size:18px}
     .list{display:grid;gap:12px}
     .perf{display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;background:var(--glass);}
-    ..perf {
-  display: flex;
-  align-items: center;
-  gap: 16px;          /* more spacing between image & text */
-  padding: 14px;      /* more padding inside card */
-  border-radius: 12px;
-  background: var(--glass);
-}
+    .perf img{width:72px;height:72px;border-radius:8px;object-fit:cover;flex-shrink:0;border:2px solid rgba(255,255,255,0.04)}
     .perf .meta{flex:1}
     .meta .name{font-weight:700}
     .meta .role{font-size:13px;color:var(--muted)}
@@ -171,5 +164,3 @@
   </script>
 </body>
 </html>
-
-
