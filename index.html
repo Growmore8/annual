@@ -52,7 +52,6 @@
 
     /* small helper */
     .muted{color:var(--muted);font-size:13px}
-
   </style>
 </head>
 <body>
@@ -60,7 +59,6 @@
     <header>
       <div class="brand">
         <div class="logo">
-          <!-- Replace logo.png with your actual logo -->
           <img src="logo W.jpg" alt="Grow More Solutions Logo">
         </div>
         <div>
@@ -105,24 +103,33 @@
   </div>
 
   <script>
-    // ----- Update this array with your staff images -----
+    // ----- Staff Data -----
     const performers = [
-    { name: 'P. Venujan', image: '397A8292.jpg', count: 27, amount: 'USD 4,874.53' },
-    { name: 'K. Sharmila', image: 'Sharmila.jpg', count: 27, amount: 'USD 5,320.43' },
-    { name: 'A. Marcuss Labroy', image: 'Marcuss.jpg', count: 26, amount: 'USD 4,333.59' },
-    { name: 'R. Kushalini', image: '397A8292+.jpg', count: 24, amount: 'USD 4,019.00' },
-    { name: 'S. Sakura Vinadhari', image: 'Sakura.jpg', count: 23, amount: 'USD 3,025.10' }
-  ];
+      { name: 'P. Venujan', image: '397A8292.jpg', count: 27, amount: 'USD 4,874.53' },
+      { name: 'K. Sharmila', image: 'Sharmila.jpg', count: 27, amount: 'USD 5,320.43' },
+      { name: 'A. Marcuss Labroy', image: 'Marcuss.jpg', count: 26, amount: 'USD 4,333.59' },
+      { name: 'R. Kushalini', image: '397A8292+.jpg', count: 24, amount: 'USD 4,019.00' },
+      { name: 'S. Sakura Vinadhari', image: 'Sakura.jpg', count: 23, amount: 'USD 3,025.10' }
+    ];
 
+    // ----- Sort by count desc, then amount desc -----
+    const sortedPerformers = performers.sort((a, b) => {
+      if (b.count !== a.count) return b.count - a.count;
+      const amountA = parseFloat(a.amount.replace(/[^\d.]/g, ''));
+      const amountB = parseFloat(b.amount.replace(/[^\d.]/g, ''));
+      return amountB - amountA;
+    });
+
+    // ----- Render Performer Cards -----
     const list = document.getElementById('performerList');
-    performers.forEach((p, idx) => {
+    sortedPerformers.forEach((p, idx) => {
       const el = document.createElement('div');
       el.className = 'perf';
       el.innerHTML = `
         <img src="${p.image}" alt="${p.name}">
         <div class="meta">
-          <div class="name">${idx+1}. ${p.name}</div>
-          <div class="role">Top performer — Rank ${idx+1}</div>
+          <div class="name">${idx + 1}. ${p.name}</div>
+          <div class="role">Top performer — Rank ${idx + 1}</div>
           <div class="stats">
             <div class="pill">Count: ${p.count}</div>
             <div class="pill">Amount: ${p.amount}</div>
@@ -132,7 +139,7 @@
       list.appendChild(el);
     });
 
-    // ----- Countdown logic (system time) -----
+    // ----- Countdown logic -----
     const target = new Date('2025-12-20T00:00:00');
     const daysEl = document.getElementById('days');
     const hoursEl = document.getElementById('hours');
@@ -144,7 +151,10 @@
       const now = new Date();
       let diff = target - now;
       if (diff <= 0){
-        daysEl.textContent = '0'; hoursEl.textContent='0'; minutesEl.textContent='0'; secondsEl.textContent='0';
+        daysEl.textContent = '0';
+        hoursEl.textContent='0';
+        minutesEl.textContent='0';
+        secondsEl.textContent='0';
         statusEl.textContent = 'The Annual 2025 period has ended.';
         clearInterval(clockInterval);
         return;
@@ -166,15 +176,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
