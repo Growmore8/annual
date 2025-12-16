@@ -71,26 +71,32 @@ h1{margin:0;font-size:22px;text-align:left}
   border-radius:14px;
   box-shadow:0 10px 30px rgba(0,0,0,.6);
   border-left:4px solid transparent;
-  position:relative; /* needed for badge positioning */
+  position:relative;
   flex-wrap:wrap;
 }
 
 /* Rank highlights */
-.rank1{
-  border-color:var(--gold);
-  box-shadow:0 0 18px rgba(255,204,51,.7);
+.rank1 {
+  border-color: #55DD33; /* Purple/Blue */
+  box-shadow: 0 0 18px rgba(106, 90, 205, 0.7);
 }
 .rankTop{
   border-color:var(--accent);
+}
+
+/* Golden Employee highlight */
+.golden {
+  border-color: #ffd700;
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.7);
 }
 
 /* Resigned badge (right side, rotated/flipped) */
 .card.resigned::after {
   content: "Resigned";
   position: absolute;
-  right: 40px; /* keep it on the right side */
+  right: 40px;
   top: 50%;
-  transform: translate(100%, -50%) rotate(-90deg); /* flipped rotation */
+  transform: translate(100%, -50%) rotate(-90deg);
   background: #ff4d4d;
   color: #fff;
   font-size: 11px;
@@ -248,10 +254,15 @@ staff2025
     rankClass="rank1";
     tagText = "Employee of the Year";
   } else if(i<5) rankClass="rankTop";
-  if(!s.resigned && s.totalAmount === highestAmount) tagText += tagText ? " | Golden Employee" : "Golden Employee";
+
+  let goldenClass = "";
+  if(!s.resigned && s.totalAmount === highestAmount){
+      tagText += tagText ? " | Golden Employee" : "Golden Employee";
+      goldenClass = " golden";
+  }
 
   staffGrid.innerHTML += `
-  <div class="card ${rankClass} ${s.resigned ? 'resigned':''}">
+  <div class="card ${rankClass}${goldenClass} ${s.resigned ? 'resigned':''}">
     <img src="${s.image}">
     <div class="meta">
       <div class="rank">Rank ${i+1}${tagText ? " - "+tagText : ""}</div>
