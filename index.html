@@ -32,19 +32,13 @@ header{
   gap:12px;
   margin-bottom:20px;
 }
-header div:first-child{
-  display:flex;
-  flex-direction:column;
-}
-h1{margin:0;font-size:22px;text-align:left}
-.muted{color:var(--muted);font-size:13px;text-align:left}
+h1{margin:0;font-size:22px}
+.muted{color:var(--muted);font-size:13px}
 
 /* Countdown */
 .countdown{
   display:flex;
   gap:10px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
 }
 .unit{
   background:rgba(255,255,255,.06);
@@ -54,6 +48,32 @@ h1{margin:0;font-size:22px;text-align:left}
   min-width:60px;
 }
 .unit b{font-size:16px;display:block}
+
+/* ===== SUMMARY ===== */
+.summary{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:14px;
+  margin-bottom:20px;
+}
+.summary-card{
+  background:linear-gradient(180deg,#102255,#0b1738);
+  padding:16px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,.5);
+}
+.summary-card h3{
+  margin:0;
+  font-size:14px;
+  color:var(--muted);
+}
+.summary-card b{
+  font-size:24px;
+  display:block;
+  margin-top:6px;
+  color:var(--accent);
+}
 
 /* Grid */
 .grid{
@@ -76,68 +96,39 @@ h1{margin:0;font-size:22px;text-align:left}
 }
 
 /* Rank highlights */
-.rank1 {
-  border-color: #55DD33; /* Purple/Blue */
-  box-shadow: 0 0 18px rgba(106, 90, 205, 0.7);
-}
-.rankTop{
-  border-color:var(--accent);
-}
+.rank1{border-color:#55DD33;box-shadow:0 0 18px rgba(106,90,205,.7)}
+.rankTop{border-color:var(--accent)}
+.golden{border-color:#ffd700;box-shadow:0 0 18px rgba(255,215,0,.7)}
 
-/* Golden Employee highlight */
-.golden {
-  border-color: #ffd700;
-  box-shadow: 0 0 18px rgba(255, 215, 0, 0.7);
-}
-/* ===== SALE COUNT WATERMARK ===== */
 .card::before{
   content: attr(data-sales);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 120px;
-  font-weight: 800;
-  color: rgba(255,255,255,0.06);
-  pointer-events: none;
-  white-space: nowrap;
-  z-index: 0;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:120px;
+  font-weight:800;
+  color:rgba(255,255,255,0.06);
+  pointer-events:none;
 }
 
-/* Keep card content above watermark */
-.card > *{
-  position: relative;
-  z-index: 1;
+.card > *{position:relative;z-index:1}
+
+.card.resigned::after{
+  content:"Resigned";
+  position:absolute;
+  right:40px;
+  top:50%;
+  transform:translate(100%,-50%) rotate(-90deg);
+  background:#ff4d4d;
+  font-size:11px;
+  font-weight:700;
+  padding:2px 6px;
+  border-radius:4px 4px 0 0;
 }
 
-/* Color variations */
-.card.golden::before{
-  color: rgba(255, 215, 0, 0.12);
-}
-.card.resigned::before{
-  color: rgba(255, 77, 77, 0.12);
-}
+.card.resigned{opacity:.7}
 
-/* Resigned badge (right side, rotated/flipped) */
-.card.resigned::after {
-  content: "Resigned";
-  position: absolute;
-  right: 40px;
-  top: 50%;
-  transform: translate(100%, -50%) rotate(-90deg);
-  background: #ff4d4d;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 4px 4px 0 0;
-}
-
-.card.resigned {
-  opacity: 0.7;
-}
-
-/* Card image */
 .card img{
   width:120px;
   height:120px;
@@ -145,9 +136,9 @@ h1{margin:0;font-size:22px;text-align:left}
   object-fit:cover;
 }
 
-.meta{flex:1;min-width:180px}
-.rank{color:var(--accent);font-weight:700;font-size:13px}
-.name{font-weight:700;font-size:15px}
+.meta{flex:1}
+.rank{color:var(--accent);font-size:13px;font-weight:700}
+.name{font-size:15px;font-weight:700}
 .join{font-size:12px;color:var(--muted)}
 
 .stats{
@@ -167,7 +158,6 @@ h1{margin:0;font-size:22px;text-align:left}
   height:6px;
   background:rgba(255,255,255,.1);
   border-radius:999px;
-  overflow:hidden;
   margin-top:8px;
 }
 .progress span{
@@ -176,7 +166,6 @@ h1{margin:0;font-size:22px;text-align:left}
   background:linear-gradient(90deg,var(--accent),#4dd2ff);
 }
 
-/* ===== FOOTER ===== */
 footer{
   margin-top:30px;
   text-align:center;
@@ -213,7 +202,6 @@ footer{
     <div class="muted">Grow More Solutions Pvt Ltd</div>
   </div>
 
-  <!-- Countdown -->
   <div class="countdown">
     <div class="unit"><b id="d">--</b>Days</div>
     <div class="unit"><b id="h">--</b>Hrs</div>
@@ -222,8 +210,31 @@ footer{
   </div>
 </header>
 
-<div class="grid" id="staffGrid"></div>
+<!-- ===== SUMMARY SECTION ===== -->
+<div class="summary">
+  <div class="summary-card">
+    <h3>Total Sales</h3>
+    <b id="sumSales">0</b>
+  </div>
+  <div class="summary-card">
+    <h3>Total Amount</h3>
+    <b id="sumAmount">$0.00</b>
+  </div>
+  <div class="summary-card">
+    <h3>100 Count</h3>
+    <b id="sum100">0</b>
+  </div>
+  <div class="summary-card">
+    <h3>200 Count</h3>
+    <b id="sum200">0</b>
+  </div>
+  <div class="summary-card">
+    <h3>1000 Count</h3>
+    <b id="sum1000">0</b>
+  </div>
+</div>
 
+<div class="grid" id="staffGrid"></div>
 <footer>Powered by Grow More Solutions Pvt Ltd</footer>
 
 </div>
@@ -259,15 +270,34 @@ const staff2025 = [
 { name: "R. Sachindran", image: "assets/Sachin.jpg", totalSales: 1, totalAmount:205.0, count100: 1, count200: 0, count1000: 0, joiningDate: '2025-08-21' }
 ];
 
+// ===== SUMMARY CALCULATION =====
+let totalSales = 0;
+let totalAmount = 0;
+let total100 = 0;
+let total200 = 0;
+let total1000 = 0;
+
+staff2025.forEach(s=>{
+  totalSales += s.totalSales;
+  totalAmount += s.totalAmount;
+  total100 += s.count100;
+  total200 += s.count200;
+  total1000 += s.count1000;
+});
+
+document.getElementById("sumSales").textContent = totalSales;
+document.getElementById("sumAmount").textContent =
+  "$" + totalAmount.toLocaleString("en-US",{minimumFractionDigits:2});
+document.getElementById("sum100").textContent = total100;
+document.getElementById("sum200").textContent = total200;
+document.getElementById("sum1000").textContent = total1000;
+
 // ================= RANK + RENDER =================
 const TARGET = 30;
 const staffGrid = document.getElementById("staffGrid");
 const now = new Date();
-
-// Highest amount among active staff
 const highestAmount = Math.max(...staff2025.filter(s=>!s.resigned).map(s=>s.totalAmount));
 
-// Sort by totalSales then totalAmount
 staff2025
 .sort((a,b)=> b.totalSales!==a.totalSales ? b.totalSales-a.totalSales : b.totalAmount-a.totalAmount)
 .forEach((s,i)=>{
@@ -303,35 +333,33 @@ staff2025
         <div class="pill">100: ${s.count100}</div>
         <div class="pill">200: ${s.count200}</div>
         <div class="pill">1000: ${s.count1000}</div>
-        <div class="pill">Avg Sales: ${avgCount}/month</div>
-        <div class="pill">Progress: ${progress}%</div>
       </div>
 
       <div class="progress"><span style="width:${progress}%"></span></div>
     </div>
-  </div>`;
+  </div>
+  `;
 });
 
-// ================= COUNTDOWN (COLOMBO) =================
-const target = new Date("2025-12-19T16:00:00+05:30");
-
-setInterval(()=>{
-  const now = new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Colombo"}));
-  let diff = target - now;
-  if(diff < 0) diff = 0;
-
-  const s = Math.floor(diff/1000);
-  document.getElementById('d').textContent = Math.floor(s/86400);
-  document.getElementById('h').textContent = Math.floor((s%86400)/3600);
-  document.getElementById('m').textContent = Math.floor((s%3600)/60);
-  document.getElementById('s').textContent = s%60;
-},1000);
+// ================= COUNTDOWN =================
+const countdownDate = new Date("2025-12-31T23:59:59").getTime();
+function updateCountdown(){
+  const now = new Date().getTime();
+  let diff = countdownDate - now;
+  const d = Math.floor(diff/(1000*60*60*24));
+  diff %= (1000*60*60*24);
+  const h = Math.floor(diff/(1000*60*60));
+  diff %= (1000*60*60);
+  const m = Math.floor(diff/(1000*60));
+  const s = Math.floor((diff/1000)%60);
+  document.getElementById("d").textContent=d;
+  document.getElementById("h").textContent=h;
+  document.getElementById("m").textContent=m;
+  document.getElementById("s").textContent=s;
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
 </script>
 
 </body>
 </html>
-
-
-
-
-
