@@ -89,6 +89,34 @@ h1{margin:0;font-size:22px;text-align:left}
   border-color: #ffd700;
   box-shadow: 0 0 18px rgba(255, 215, 0, 0.7);
 }
+/* ===== SALE COUNT WATERMARK ===== */
+.card::before{
+  content: attr(data-sales);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 120px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.06);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+/* Keep card content above watermark */
+.card > *{
+  position: relative;
+  z-index: 1;
+}
+
+/* Color variations */
+.card.golden::before{
+  color: rgba(255, 215, 0, 0.12);
+}
+.card.resigned::before{
+  color: rgba(255, 77, 77, 0.12);
+}
 
 /* Resigned badge (right side, rotated/flipped) */
 .card.resigned::after {
@@ -262,7 +290,7 @@ staff2025
   }
 
   staffGrid.innerHTML += `
-  <div class="card ${rankClass}${goldenClass} ${s.resigned ? 'resigned':''}">
+  <div class="card ${rankClass}${goldenClass} ${s.resigned ? 'resigned':''}" data-sales="${s.totalSales}">
     <img src="${s.image}">
     <div class="meta">
       <div class="rank">Rank ${i+1}${tagText ? " - "+tagText : ""}</div>
@@ -302,6 +330,7 @@ setInterval(()=>{
 
 </body>
 </html>
+
 
 
 
