@@ -1,187 +1,259 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Annual 2025 — Grow More Solutions Pvt Ltd</title>
-  <style>
-    :root{
-      --bg:#071033; --card:#0f1b3a; --accent:#00b4ff; --muted:#9fb3d6; --glass: rgba(255,255,255,0.03);
-      --radius:12px; --max-w:1100px;
-    }
-    *{box-sizing:border-box}
-    body{font-family:Inter, system-ui, -apple-system, Arial, sans-serif; margin:0; min-height:100vh; background:linear-gradient(180deg,#03102a 0%, #071033 60%); color:#e6f0ff; display:flex; align-items:stretch;}
-    .wrap{width:100%; max-width:var(--max-w); margin:40px auto; padding:28px;}
+<meta charset="utf-8">
+<title>Annual 2025 – All Staff Performance</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    header{display:flex;gap:16px;align-items:center; justify-content:space-between}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:10px;overflow:hidden}
-    .logo img{width:100%;height:100%;object-fit:contain;border-radius:10px}
-    h1{margin:0;font-size:20px}
-    p.lead{margin:0;color:var(--muted);font-size:13px}
+<style>
+:root{
+  --bg:#071033;
+  --card:#0f1b3a;
+  --accent:#00b4ff;
+  --gold:#ffcc33;
+  --muted:#9fb3d6;
+  --glass:rgba(255,255,255,0.04);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Arial;
+  background:linear-gradient(180deg,#03102a,#071033);
+  color:#e6f0ff;
+}
+.wrap{max-width:1400px;margin:auto;padding:15px}
 
-    main{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:20px}
+/* ===== HEADER ===== */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:20px;
+}
+header div:first-child{
+  display:flex;
+  flex-direction:column;
+}
+h1{margin:0;font-size:22px;text-align:left}
+.muted{color:var(--muted);font-size:13px;text-align:left}
 
-    /* Left: top performers */
-    .card{background:linear-gradient(180deg,var(--card), rgba(15,27,58,0.75)); padding:18px;border-radius:var(--radius); box-shadow:0 8px 30px rgba(2,6,23,0.6);}
-    .performers h2{margin:0 0 12px;font-size:18px}
-    .list{display:grid;gap:12px}
-    .perf{display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;background:var(--glass);}
-    .perf img{width:150px;height:150px;border-radius:8px;object-fit:cover;flex-shrink:0;border:2px solid rgba(255,255,255,0.04)}
-    .perf .meta{flex:1}
-    .meta .name{font-weight:700}
-    .meta .role{font-size:13px;color:var(--muted)}
-    .meta .stats{margin-top:8px;display:flex;gap:10px;font-size:13px}
-    .pill{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:600}
+/* Countdown */
+.countdown{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.unit{
+  background:rgba(255,255,255,.06);
+  padding:10px 12px;
+  border-radius:10px;
+  text-align:center;
+  min-width:60px;
+}
+.unit b{font-size:16px;display:block}
 
-    /* Right: countdown */
-    .aside{position:relative}
-    .countdown{display:flex;flex-direction:column;gap:10px}
-    .countdown .title{font-size:16px;margin:0}
-    .clock{display:flex;gap:10px}
-    .unit{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); padding:14px 12px;border-radius:10px;min-width:70px;text-align:center}
-    .unit .num{font-size:20px;font-weight:800}
-    .unit .lbl{font-size:11px;color:var(--muted);margin-top:6px}
+/* Grid */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:16px;
+}
 
-    .footer{margin-top:20px;padding-top:16px;border-top:1px dashed rgba(255,255,255,0.03);display:flex;align-items:flex-start;gap:16px}
-    .company{font-size:13px;color:var(--muted)}
-    .address{font-size:12px;color:var(--muted);line-height:1.3}
+/* Card */
+.card{
+  display:flex;
+  gap:14px;
+  background:linear-gradient(180deg,var(--card),rgba(15,27,58,.8));
+  padding:16px;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+  border-left:4px solid transparent;
+  flex-wrap:wrap;
+}
 
-    /* Responsive */
-    @media (max-width:900px){main{grid-template-columns:1fr;}.aside{order:2}}
+/* Rank highlights */
+.rank1{
+  border-color:var(--gold);
+  box-shadow:0 0 18px rgba(255,204,51,.7);
+}
+.rankTop{
+  border-color:var(--accent);
+}
 
-    /* small helper */
-    .muted{color:var(--muted);font-size:13px}
-  </style>
+.card img{
+  width:90px;
+  height:90px;
+  border-radius:12px;
+  object-fit:cover;
+}
+
+.meta{flex:1;min-width:180px}
+.rank{color:var(--accent);font-weight:700;font-size:13px}
+.name{font-weight:700;font-size:15px}
+.join{font-size:12px;color:var(--muted)}
+
+.stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:8px;
+}
+.pill{
+  font-size:12px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.05);
+}
+
+.progress{
+  height:6px;
+  background:rgba(255,255,255,.1);
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:8px;
+}
+.progress span{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),#4dd2ff);
+}
+
+/* ===== FOOTER ===== */
+footer{
+  margin-top:30px;
+  text-align:center;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* ===== MOBILE MEDIA QUERIES ===== */
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));}
+  .card img{width:80px;height:80px;}
+}
+
+@media(max-width:600px){
+  header{flex-direction:column;align-items:center;text-align:center;}
+  header div:first-child{text-align:center;}
+  .countdown{justify-content:center;}
+  .grid{grid-template-columns:1fr;}
+  .card{flex-direction:column;align-items:center;text-align:center;}
+  .meta{min-width:auto}
+  .stats{justify-content:center;}
+  .progress{width:100%;}
+}
+</style>
 </head>
+
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo">
-          <img src="logo W.jpg" alt="Grow More Solutions Logo">
-        </div>
-        <div>
-          <h1>Annual 2025 — Grow More Solutions Pvt Ltd</h1>
-          <p class="lead">Top performers & countdown to company year-end</p>
-        </div>
-      </div>
-      <div class="muted">Event end: <strong>20 December 2025</strong></div>
-    </header>
+<div class="wrap">
 
-    <main>
-      <section class="card performers">
-        <h2>Top 5 Performers — Annual 2025</h2>
-        <div class="list" id="performerList"></div>
-      </section>
-
-      <aside class="aside">
-        <div class="card countdown">
-          <h3 class="title">Countdown — Annual 2025</h3>
-          <p class="muted">Time remaining until <strong>20 Dec 2025</strong> (system time)</p>
-          <div class="clock" id="clock">
-            <div class="unit"><div class="num" id="days">--</div><div class="lbl">Days</div></div>
-            <div class="unit"><div class="num" id="hours">--</div><div class="lbl">Hours</div></div>
-            <div class="unit"><div class="num" id="minutes">--</div><div class="lbl">Minutes</div></div>
-            <div class="unit"><div class="num" id="seconds">--</div><div class="lbl">Seconds</div></div>
-          </div>
-          <div id="status" style="margin-top:12px;font-size:13px;color:var(--muted)"></div>
-        </div>
-
-        <div class="footer">
-          <div>
-            <div class="company">© Grow More Solutions Pvt Ltd (PV00282714)</div>
-            <div class="address">
-              No 3A, 1/3 Meeghawatta Road, Delkanda, Nugegoda, Sri Lanka<br>
-              Tel: 0112804924 / 0112804925 | Mob: +94 723 280097<br>
-              info@growmoresolutions.lk | www.growmoresolutions.lk
-            </div>
-          </div>
-        </div>
-      </aside>
-    </main>
+<header>
+  <div>
+    <h1>Annual 2025 – All Staff Performance</h1>
+    <div class="muted">Grow More Solutions Pvt Ltd</div>
   </div>
 
-  <script>
-    // ----- Staff Data -----
-    const performers = [
-      { name: 'P. Venujan', image: '397A8292.jpg', count: 27, amount: 'USD 4,874.53' },
-      { name: 'K. Sharmila', image: 'Sharmila.jpg', count: 28, amount: 'USD 6,479.43' },
-      { name: 'A. Marcuss Labroy', image: 'Marcuss.jpg', count: 30, amount: 'USD 5,059.59' },
-      { name: 'R. Kushalini', image: '397A8292+.jpg', count: 25, amount: 'USD 4,519.00' },
-      { name: 'S. Sakura Vinadhari', image: 'Sakura.jpg', count: 25, amount: 'USD 3,211.10' }
-    ];
+  <!-- Countdown -->
+  <div class="countdown">
+    <div class="unit"><b id="d">--</b>Days</div>
+    <div class="unit"><b id="h">--</b>Hrs</div>
+    <div class="unit"><b id="m">--</b>Min</div>
+    <div class="unit"><b id="s">--</b>Sec</div>
+  </div>
+</header>
 
-    // ----- Sort by count desc, then amount desc -----
-    const sortedPerformers = performers.sort((a, b) => {
-      if (b.count !== a.count) return b.count - a.count;
-      const amountA = parseFloat(a.amount.replace(/[^\d.]/g, ''));
-      const amountB = parseFloat(b.amount.replace(/[^\d.]/g, ''));
-      return amountB - amountA;
-    });
+<div class="grid" id="staffGrid"></div>
 
-    // ----- Render Performer Cards -----
-    const list = document.getElementById('performerList');
-    sortedPerformers.forEach((p, idx) => {
-      const el = document.createElement('div');
-      el.className = 'perf';
-      el.innerHTML = `
-        <img src="${p.image}" alt="${p.name}">
-        <div class="meta">
-          <div class="name">${idx + 1}. ${p.name}</div>
-          <div class="role">Top performer — Rank ${idx + 1}</div>
-          <div class="stats">
-            <div class="pill">Count: ${p.count}</div>
-            <div class="pill">Amount: ${p.amount}</div>
-          </div>
-        </div>
-      `;
-      list.appendChild(el);
-    });
+<footer>Powered by Grow More Solutions Pvt Ltd</footer>
 
-    // ----- Countdown logic -----
-    const target = new Date('2025-12-20T00:00:00');
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
-    const statusEl = document.getElementById('status');
+</div>
 
-    function updateClock(){
-      const now = new Date();
-      let diff = target - now;
-      if (diff <= 0){
-        daysEl.textContent = '0';
-        hoursEl.textContent='0';
-        minutesEl.textContent='0';
-        secondsEl.textContent='0';
-        statusEl.textContent = 'The Annual 2025 period has ended.';
-        clearInterval(clockInterval);
-        return;
-      }
-      const s = Math.floor(diff/1000);
-      const days = Math.floor(s / 86400);
-      const hours = Math.floor((s % 86400) / 3600);
-      const minutes = Math.floor((s % 3600) / 60);
-      const seconds = s % 60;
-      daysEl.textContent = days;
-      hoursEl.textContent = String(hours).padStart(2,'0');
-      minutesEl.textContent = String(minutes).padStart(2,'0');
-      secondsEl.textContent = String(seconds).padStart(2,'0');
-      statusEl.textContent = `Updated using system time: ${now.toLocaleString()}`;
-    }
+<script>
+// ================= FULL STAFF DATA =================
+const staff2025 = [
+{ name: "P. Venujan", image: "assets/Venu.jpg", totalSales: 27, totalAmount:4874.53, count100: 17, count200: 9, count1000: 1, joiningDate: '2024-04-19' },
+{ name: "R. Kushalini", image: "assets/kushalini.jpg", totalSales: 25, totalAmount:4519.00, count100: 13, count200: 12, count1000: 0, joiningDate: '2024-02-01' },
+{ name: "T. Dinushan", image: "assets/Dinushan.jpg", totalSales: 24, totalAmount: 7511.78, count100: 9, count200: 11, count1000: 4, joiningDate: '2024-04-01' },
+{ name: "K. Sharmila", image: "assets/Sharmila.jpg", totalSales: 29, totalAmount: 6579.43, count100: 13, count200: 14, count1000: 2, joiningDate: '2024-06-06' },
+{ name: "M. Niranjan", image: "assets/Nuwan.jpg", totalSales: 8, totalAmount: 2547, count100: 5, count200: 3, count1000: 0, joiningDate: '2024-06-03' },
+{ name: "P. Sathurshika", image: "assets/Sathu.png", totalSales: 10, totalAmount: 3168.73, count100: 6, count200: 2, count1000: 2, joiningDate: '2024-06-06' },
+{ name: "A. Marcuss", image: "assets/Marcuss.jpg", totalSales: 30, totalAmount: 5059.59, count100: 16, count200: 14, count1000: 0, joiningDate: '2024-10-08' },
+{ name: "G. Vilusha", image: "assets/Vilusha.jpg", totalSales: 15, totalAmount: 3047.92, count100: 9, count200: 5, count1000: 1, joiningDate: '2024-11-25' },
+{ name: "S. Sakura", image: "assets/Sakura.jpg", totalSales: 25, totalAmount: 3221.62, count100: 20, count200: 5, count1000: 0, joiningDate: '2025-02-11' },
+{ name: "P. Nadhiishan", image: "assets/Nadiishan.jpg", totalSales: 22, totalAmount: 7788.32, count100: 9, count200: 10, count1000: 3, joiningDate: '2024-11-25' },
+{ name: "A. Lakshan", image: "assets/Lakshan.png", totalSales: 5, totalAmount: 1489.37, count100: 4, count200: 0, count1000: 1, joiningDate: '2024-11-20' },
+{ name: "T. Hamsaruban", image: "assets/hamsa.jpg", totalSales: 24, totalAmount: 21230.56, count100: 15, count200: 2, count1000: 7, joiningDate: '2025-02-03' },
+{ name: "J. Welinton", image: "assets/Welinton.png", totalSales: 6, totalAmount: 1024.62, count100: 2, count200: 4, count1000: 0, joiningDate: '2025-02-03' },
+{ name: "A. Anaaf", image: "assets/Anaaf.Png", totalSales: 5, totalAmount: 1631.29, count100: 2, count200: 2, count1000: 1, joiningDate: '2025-04-28' },
+{ name: "P. Abhishek", image: "assets/Abhi.Png", totalSales: 2, totalAmount: 209.60, count100: 2, count200: 0, count1000: 0, joiningDate: '2025-04-29' },
+{ name: "M. Radhika", image: "assets/Radika.jpg", totalSales: 13, totalAmount:2797.90, count100: 1, count200: 12, count1000: 0, joiningDate: '2025-06-02' },
+{ name: "J. Dilukshika", image: "assets/dilu.jpg", totalSales: 5, totalAmount: 754.00, count100: 4, count200: 1, count1000: 0, joiningDate: '2025-07-03' },
+{ name: "V. Sharuksha Bawan", image: "assets/bawan.jpg", totalSales: 8, totalAmount: 1306, count100: 3, count200: 5, count1000: 0, joiningDate: '2025-07-14' },
+{ name: "S. Dhanushkanthan", image: "assets/dhanush.png", totalSales: 1, totalAmount: 200.00, count100: 0, count200: 1, count1000: 0, joiningDate: '2025-07-08' },
+{ name: "Shadow Team", image: "assets/Shadow.jpg", totalSales: 3, totalAmount: 1938.45, count100: 0, count200: 2, count1000: 1, joiningDate: '' },
+{ name: "S. Thanusiyan", image: "assets/Thanushiyan.jpg", totalSales: 4, totalAmount: 6540.40, count100: 0, count200: 2, count1000: 2, joiningDate: '2025-08-22' },
+{ name: "S. Vickneshwaran", image: "assets/Vicky.jpg", totalSales: 3, totalAmount: 509.30, count100: 1, count200: 2, count1000: 0, joiningDate: '2025-08-18' },
+{ name: "S. Ameena Farvin", image: "assets/Ameena.jpg", totalSales: 1, totalAmount: 204.30, count100: 0, count200: 1, count1000: 0, joiningDate: '2025-09-01' },
+{ name: "S. Subash", image: "assets/Subash.jpg", totalSales: 9, totalAmount: 1471.46, count100: 4, count200: 5, count1000: 0, joiningDate: '2025-06-16' },
+{ name: "M. Dharshani", image: "assets/Dharu.jpg", totalSales: 2, totalAmount: 415.78, count100: 0, count200: 2, count1000: 0, joiningDate: '2025-09-16' },
+{ name: "R. Sachindran", image: "assets/Sachin.jpg", totalSales: 1, totalAmount:205.0, count100: 1, count200: 0, count1000: 0, joiningDate: '2025-08-21' }
+];
 
-    updateClock();
-    const clockInterval = setInterval(updateClock, 1000);
-  </script>
+// ================= RANK + RENDER =================
+const TARGET = 30;
+const staffGrid = document.getElementById("staffGrid");
+
+staff2025
+.sort((a,b)=> b.totalSales!==a.totalSales ? b.totalSales-a.totalSales : b.totalAmount-a.totalAmount)
+.forEach((s,i)=>{
+  const progress = Math.min(100, Math.round((s.totalSales/TARGET)*100));
+  const avgCount = (s.totalSales/12).toFixed(1);
+
+  let rankClass = "";
+  if(i===0) rankClass="rank1";
+  else if(i<5) rankClass="rankTop";
+
+  staffGrid.innerHTML += `
+  <div class="card ${rankClass}">
+    <img src="${s.image}">
+    <div class="meta">
+      <div class="rank">Rank ${i+1}</div>
+      <div class="name">${s.name}</div>
+      <div class="join">Joined: ${s.joiningDate || '-'}</div>
+
+      <div class="stats">
+        <div class="pill">Sales: ${s.totalSales}</div>
+        <div class="pill">100: ${s.count100}</div>
+        <div class="pill">200: ${s.count200}</div>
+        <div class="pill">1000: ${s.count1000}</div>
+        <div class="pill">Avg Sales: ${avgCount}/month</div>
+        <div class="pill">Progress: ${progress}%</div>
+      </div>
+
+      <div class="progress"><span style="width:${progress}%"></span></div>
+    </div>
+  </div>`;
+});
+
+// ================= COUNTDOWN (COLOMBO) =================
+const target = new Date("2025-12-19T00:00:00+05:30");
+
+setInterval(()=>{
+  const now = new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Colombo"}));
+  let diff = target - now;
+  if(diff < 0) diff = 0;
+
+  const s = Math.floor(diff/1000);
+  document.getElementById('d').textContent = Math.floor(s/86400);
+  document.getElementById('h').textContent = Math.floor((s%86400)/3600);
+  document.getElementById('m').textContent = Math.floor((s%3600)/60);
+  document.getElementById('s').textContent = s%60;
+},1000);
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
