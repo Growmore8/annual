@@ -84,8 +84,8 @@ h1{margin:0;font-size:22px;text-align:left}
 }
 
 .card img{
-  width:90px;
-  height:90px;
+  width:120px;
+  height:120px;
   border-radius:12px;
   object-fit:cover;
 }
@@ -132,7 +132,7 @@ footer{
 /* ===== MOBILE MEDIA QUERIES ===== */
 @media(max-width:900px){
   .grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));}
-  .card img{width:80px;height:80px;}
+  .card img{width:100px;height:100px;}
 }
 
 @media(max-width:600px){
@@ -144,6 +144,7 @@ footer{
   .meta{min-width:auto}
   .stats{justify-content:center;}
   .progress{width:100%;}
+  .card img{width:100px;height:100px;}
 }
 </style>
 </head>
@@ -186,7 +187,7 @@ const staff2025 = [
 { name: "S. Sakura", image: "assets/Sakura.jpg", totalSales: 25, totalAmount: 3221.62, count100: 20, count200: 5, count1000: 0, joiningDate: '2025-02-11' },
 { name: "P. Nadhiishan", image: "assets/Nadiishan.jpg", totalSales: 22, totalAmount: 7788.32, count100: 9, count200: 10, count1000: 3, joiningDate: '2024-11-25' },
 { name: "A. Lakshan", image: "assets/Lakshan.png", totalSales: 5, totalAmount: 1489.37, count100: 4, count200: 0, count1000: 1, joiningDate: '2024-11-20' },
-{ name: "T. Hamsaruban", image: "assets/Hamsa.jpg", totalSales: 24, totalAmount: 21230.56, count100: 15, count200: 2, count1000: 7, joiningDate: '2025-02-03' },
+{ name: "T. Hamsaruban", image: "assets/Hamsa.jpg", totalSales: 24, totalAmount: 21230.56, count100: 15, count200: 2, count1000: 7, joiningDate: '2025-02-03', resigned:true },
 { name: "J. Welinton", image: "assets/Welinton.png", totalSales: 6, totalAmount: 1024.62, count100: 2, count200: 4, count1000: 0, joiningDate: '2025-02-03' },
 { name: "A. Anaaf", image: "assets/Anaaf.png", totalSales: 5, totalAmount: 1631.29, count100: 2, count200: 2, count1000: 1, joiningDate: '2025-04-28' },
 { name: "P. Abhishek", image: "assets/abhi.png", totalSales: 2, totalAmount: 209.60, count100: 2, count200: 0, count1000: 0, joiningDate: '2025-04-29' },
@@ -206,22 +207,45 @@ const staff2025 = [
 // ================= RANK + RENDER =================
 const TARGET = 30;
 const staffGrid = document.getElementById("staffGrid");
+const now = new Date();
 
-staff2025
+// Filter out resigned staff
+const activeStaff = staff2025.filter(s => !s.resigned);
+
+// Find the highest totalAmount among active staff
+const highestAmount = Math.max(...activeStaff.map(s => s.totalAmount));
+
+activeStaff
 .sort((a,b)=> b.totalSales!==a.totalSales ? b.totalSales-a.totalSales : b.totalAmount-a.totalAmount)
 .forEach((s,i)=>{
-  const progress = Math.min(100, Math.round((s.totalSales/TARGET)*100));
-  const avgCount = (s.totalSales/12).toFixed(1);
+  const joining = s.joiningDate ? new Date(s.joiningDate) : new Date(now.getFullYear(),0,1);
 
+  // Average sales calculation
+  let monthsActive;
+  if(joining.getFullYear() === now.getFullYear()){
+    monthsActive = now.getMonth() - joining.getMonth() + 1; // include current month
+  } else {
+    monthsActive = 12;
+  }
+  const avgCount = (s.totalSales / monthsActive).toFixed(1);
+
+  const progress = Math.min(100, Math.round((s.totalSales/TARGET)*100));
+
+  // Rank / tag
   let rankClass = "";
-  if(i===0) rankClass="rank1";
-  else if(i<5) rankClass="rankTop";
+  let tagText = "";
+  if(i===0){
+    rankClass="rank1";
+    tagText = "Employee of the Year";
+  } else if(i<5) rankClass="rankTop";
+
+  if(s.totalAmount === highestAmount) tagText += tagText ? " | Golden Employee" : "Golden Employee";
 
   staffGrid.innerHTML += `
   <div class="card ${rankClass}">
     <img src="${s.image}">
     <div class="meta">
-      <div class="rank">Rank ${i+1}</div>
+      <div class="rank">Rank ${i+1}${tagText ? " - "+tagText : ""}</div>
       <div class="name">${s.name}</div>
       <div class="join">Joined: ${s.joiningDate || '-'}</div>
 
@@ -257,8 +281,3 @@ setInterval(()=>{
 
 </body>
 </html>
-
-
-
-
-
