@@ -71,6 +71,7 @@ h1{margin:0;font-size:22px;text-align:left}
   border-radius:14px;
   box-shadow:0 10px 30px rgba(0,0,0,.6);
   border-left:4px solid transparent;
+  position:relative; /* needed for badge positioning */
   flex-wrap:wrap;
 }
 
@@ -83,6 +84,26 @@ h1{margin:0;font-size:22px;text-align:left}
   border-color:var(--accent);
 }
 
+/* Resigned badge (right side, rotated/flipped) */
+.card.resigned::after {
+  content: "Resigned";
+  position: absolute;
+  right: 40px; /* keep it on the right side */
+  top: 50%;
+  transform: translate(100%, -50%) rotate(-90deg); /* flipped rotation */
+  background: #ff4d4d;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px 4px 0 0;
+}
+
+.card.resigned {
+  opacity: 0.7;
+}
+
+/* Card image */
 .card img{
   width:120px;
   height:120px;
@@ -186,20 +207,20 @@ const staff2025 = [
 { name: "G. Vilusha", image: "assets/Vilusha.jpg", totalSales: 15, totalAmount: 3047.92, count100: 9, count200: 5, count1000: 1, joiningDate: '2024-11-25' },
 { name: "S. Sakura", image: "assets/Sakura.jpg", totalSales: 25, totalAmount: 3221.62, count100: 20, count200: 5, count1000: 0, joiningDate: '2025-02-11' },
 { name: "P. Nadhiishan", image: "assets/Nadiishan.jpg", totalSales: 22, totalAmount: 7788.32, count100: 9, count200: 10, count1000: 3, joiningDate: '2024-11-25' },
-{ name: "A. Lakshan", image: "assets/Lakshan.png", totalSales: 5, totalAmount: 1489.37, count100: 4, count200: 0, count1000: 1, joiningDate: '2024-11-20' },
+{ name: "A. Lakshan", image: "assets/Lakshan.png", totalSales: 5, totalAmount: 1489.37, count100: 4, count200: 0, count1000: 1, joiningDate: '2024-11-20' , resigned:true},
 { name: "T. Hamsaruban", image: "assets/Hamsa.jpg", totalSales: 24, totalAmount: 21230.56, count100: 15, count200: 2, count1000: 7, joiningDate: '2025-02-03', resigned:true },
-{ name: "J. Welinton", image: "assets/Welinton.png", totalSales: 6, totalAmount: 1024.62, count100: 2, count200: 4, count1000: 0, joiningDate: '2025-02-03' },
-{ name: "A. Anaaf", image: "assets/Anaaf.png", totalSales: 5, totalAmount: 1631.29, count100: 2, count200: 2, count1000: 1, joiningDate: '2025-04-28' },
-{ name: "P. Abhishek", image: "assets/abhi.png", totalSales: 2, totalAmount: 209.60, count100: 2, count200: 0, count1000: 0, joiningDate: '2025-04-29' },
-{ name: "M. Radhika", image: "assets/Radika.jpg", totalSales: 13, totalAmount:2797.90, count100: 1, count200: 12, count1000: 0, joiningDate: '2025-06-02' },
+{ name: "J. Welinton", image: "assets/Welinton.png", totalSales: 6, totalAmount: 1024.62, count100: 2, count200: 4, count1000: 0, joiningDate: '2025-02-03' , resigned:true},
+{ name: "A. Anaaf", image: "assets/Anaaf.png", totalSales: 5, totalAmount: 1631.29, count100: 2, count200: 2, count1000: 1, joiningDate: '2025-04-28', resigned:true },
+{ name: "P. Abhishek", image: "assets/abhi.png", totalSales: 2, totalAmount: 209.60, count100: 2, count200: 0, count1000: 0, joiningDate: '2025-04-29', resigned:true },
+{ name: "M. Radhika", image: "assets/Radika.jpg", totalSales: 13, totalAmount:2797.90, count100: 1, count200: 12, count1000: 0, joiningDate: '2025-06-02' , resigned:true },
 { name: "J. Dilukshika", image: "assets/Dilu.jpg", totalSales: 5, totalAmount: 754.00, count100: 4, count200: 1, count1000: 0, joiningDate: '2025-07-03' },
 { name: "V. Sharuksha Bawan", image: "assets/Bawan.jpg", totalSales: 8, totalAmount: 1306, count100: 3, count200: 5, count1000: 0, joiningDate: '2025-07-14' },
-{ name: "S. Dhanushkanthan", image: "assets/dhanush.png", totalSales: 1, totalAmount: 200.00, count100: 0, count200: 1, count1000: 0, joiningDate: '2025-07-08' },
+{ name: "S. Dhanushkanthan", image: "assets/dhanush.png", totalSales: 1, totalAmount: 200.00, count100: 0, count200: 1, count1000: 0, joiningDate: '2025-07-08', resigned:true },
 { name: "Shadow Team", image: "assets/Shadow.jpg", totalSales: 3, totalAmount: 1938.45, count100: 0, count200: 2, count1000: 1, joiningDate: '' },
 { name: "S. Thanusiyan", image: "assets/Thanushiyan.jpg", totalSales: 4, totalAmount: 6540.40, count100: 0, count200: 2, count1000: 2, joiningDate: '2025-08-22' },
 { name: "S. Vickneshwaran", image: "assets/Vicky.jpg", totalSales: 3, totalAmount: 509.30, count100: 1, count200: 2, count1000: 0, joiningDate: '2025-08-18' },
-{ name: "S. Ameena Farvin", image: "assets/Ameena.jpg", totalSales: 1, totalAmount: 204.30, count100: 0, count200: 1, count1000: 0, joiningDate: '2025-09-01' },
-{ name: "S. Subash", image: "assets/Subash.jpg", totalSales: 9, totalAmount: 1471.46, count100: 4, count200: 5, count1000: 0, joiningDate: '2025-06-16' },
+{ name: "S. Ameena Farvin", image: "assets/Ameena.jpg", totalSales: 1, totalAmount: 204.30, count100: 0, count200: 1, count1000: 0, joiningDate: '2025-09-01', resigned:true },
+{ name: "S. Subash", image: "assets/Subash.jpg", totalSales: 9, totalAmount: 1471.46, count100: 4, count200: 5, count1000: 0, joiningDate: '2025-06-16' , resigned:true},
 { name: "M. Dharshani", image: "assets/Dharu.jpg", totalSales: 2, totalAmount: 415.78, count100: 0, count200: 2, count1000: 0, joiningDate: '2025-09-16' },
 { name: "R. Sachindran", image: "assets/Sachin.jpg", totalSales: 1, totalAmount:205.0, count100: 1, count200: 0, count1000: 0, joiningDate: '2025-08-21' }
 ];
@@ -209,40 +230,28 @@ const TARGET = 30;
 const staffGrid = document.getElementById("staffGrid");
 const now = new Date();
 
-// Filter out resigned staff
-const activeStaff = staff2025.filter(s => !s.resigned);
+// Highest amount among active staff
+const highestAmount = Math.max(...staff2025.filter(s=>!s.resigned).map(s=>s.totalAmount));
 
-// Find the highest totalAmount among active staff
-const highestAmount = Math.max(...activeStaff.map(s => s.totalAmount));
-
-activeStaff
+// Sort by totalSales then totalAmount
+staff2025
 .sort((a,b)=> b.totalSales!==a.totalSales ? b.totalSales-a.totalSales : b.totalAmount-a.totalAmount)
 .forEach((s,i)=>{
   const joining = s.joiningDate ? new Date(s.joiningDate) : new Date(now.getFullYear(),0,1);
-
-  // Average sales calculation
-  let monthsActive;
-  if(joining.getFullYear() === now.getFullYear()){
-    monthsActive = now.getMonth() - joining.getMonth() + 1; // include current month
-  } else {
-    monthsActive = 12;
-  }
+  let monthsActive = joining.getFullYear() === now.getFullYear() ? now.getMonth() - joining.getMonth() + 1 : 12;
   const avgCount = (s.totalSales / monthsActive).toFixed(1);
-
   const progress = Math.min(100, Math.round((s.totalSales/TARGET)*100));
 
-  // Rank / tag
   let rankClass = "";
   let tagText = "";
   if(i===0){
     rankClass="rank1";
     tagText = "Employee of the Year";
   } else if(i<5) rankClass="rankTop";
-
-  if(s.totalAmount === highestAmount) tagText += tagText ? " | Golden Employee" : "Golden Employee";
+  if(!s.resigned && s.totalAmount === highestAmount) tagText += tagText ? " | Golden Employee" : "Golden Employee";
 
   staffGrid.innerHTML += `
-  <div class="card ${rankClass}">
+  <div class="card ${rankClass} ${s.resigned ? 'resigned':''}">
     <img src="${s.image}">
     <div class="meta">
       <div class="rank">Rank ${i+1}${tagText ? " - "+tagText : ""}</div>
@@ -251,10 +260,10 @@ activeStaff
 
       <div class="stats">
         <div class="pill">Sales: ${s.totalSales}</div>
-        <div class="pill">Total: $${s.totalAmount.toLocaleString()}</div>
-        <div class="pill">$100: ${s.count100}</div>
-        <div class="pill">$200: ${s.count200}</div>
-        <div class="pill">$1000: ${s.count1000}</div>
+        <div class="pill">Amount: $${s.totalAmount.toFixed(2)}</div>
+        <div class="pill">100: ${s.count100}</div>
+        <div class="pill">200: ${s.count200}</div>
+        <div class="pill">1000: ${s.count1000}</div>
         <div class="pill">Avg Sales: ${avgCount}/month</div>
         <div class="pill">Progress: ${progress}%</div>
       </div>
@@ -282,5 +291,3 @@ setInterval(()=>{
 
 </body>
 </html>
-
-
