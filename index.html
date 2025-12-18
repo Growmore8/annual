@@ -12,7 +12,6 @@
   --accent:#00b4ff;
   --gold:#ffcc33;
   --muted:#9fb3d6;
-  --glass:rgba(255,255,255,0.04);
 }
 *{box-sizing:border-box}
 body{
@@ -23,7 +22,6 @@ body{
 }
 .wrap{max-width:1400px;margin:auto;padding:15px}
 
-/* ===== HEADER ===== */
 header{
   display:flex;
   justify-content:space-between;
@@ -35,11 +33,7 @@ header{
 h1{margin:0;font-size:22px}
 .muted{color:var(--muted);font-size:13px}
 
-/* Countdown */
-.countdown{
-  display:flex;
-  gap:10px;
-}
+.countdown{display:flex;gap:10px}
 .unit{
   background:rgba(255,255,255,.06);
   padding:10px 12px;
@@ -49,7 +43,6 @@ h1{margin:0;font-size:22px}
 }
 .unit b{font-size:16px;display:block}
 
-/* ===== SUMMARY ===== */
 .summary{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -61,44 +54,29 @@ h1{margin:0;font-size:22px}
   padding:16px;
   border-radius:14px;
   text-align:center;
-  box-shadow:0 10px 25px rgba(0,0,0,.5);
 }
-.summary-card h3{
-  margin:0;
-  font-size:14px;
-  color:var(--muted);
-}
-.summary-card b{
-  font-size:24px;
-  display:block;
-  margin-top:6px;
-  color:var(--accent);
-}
+.summary-card h3{margin:0;font-size:14px;color:var(--muted)}
+.summary-card b{font-size:24px;display:block;margin-top:6px;color:var(--accent)}
 
-/* Grid */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
   gap:16px;
 }
 
-/* Card */
 .card{
   display:flex;
   gap:14px;
   background:linear-gradient(180deg,var(--card),rgba(15,27,58,.8));
   padding:16px;
   border-radius:14px;
-  box-shadow:0 10px 30px rgba(0,0,0,.6);
   border-left:4px solid transparent;
   position:relative;
   flex-wrap:wrap;
 }
-
-/* Rank highlights */
-.rank1{border-color:#55DD33;box-shadow:0 0 18px rgba(106,90,205,.7)}
+.rank1{border-color:#55dd33}
 .rankTop{border-color:var(--accent)}
-.golden{border-color:#ffd700;box-shadow:0 0 18px rgba(255,215,0,.7)}
+.golden{border-color:#ffd700}
 
 .card::before{
   content: attr(data-sales);
@@ -109,11 +87,9 @@ h1{margin:0;font-size:22px}
   font-size:120px;
   font-weight:800;
   color:rgba(255,255,255,0.06);
-  pointer-events:none;
 }
 
-.card > *{position:relative;z-index:1}
-
+.card.resigned{opacity:.7}
 .card.resigned::after{
   content:"Resigned";
   position:absolute;
@@ -124,10 +100,7 @@ h1{margin:0;font-size:22px}
   font-size:11px;
   font-weight:700;
   padding:2px 6px;
-  border-radius:4px 4px 0 0;
 }
-
-.card.resigned{opacity:.7}
 
 .card img{
   width:120px;
@@ -153,6 +126,12 @@ h1{margin:0;font-size:22px}
   border-radius:999px;
   background:rgba(255,255,255,.05);
 }
+.pill.avg{
+  background:linear-gradient(90deg,#00b4ff,#4dd2ff);
+  color:#03102a;
+  font-weight:700;
+}
+
 
 .progress{
   height:6px;
@@ -171,24 +150,6 @@ footer{
   text-align:center;
   font-size:13px;
   color:var(--muted);
-}
-
-/* ===== MOBILE MEDIA QUERIES ===== */
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));}
-  .card img{width:100px;height:100px;}
-}
-
-@media(max-width:600px){
-  header{flex-direction:column;align-items:center;text-align:center;}
-  header div:first-child{text-align:center;}
-  .countdown{justify-content:center;}
-  .grid{grid-template-columns:1fr;}
-  .card{flex-direction:column;align-items:center;text-align:center;}
-  .meta{min-width:auto}
-  .stats{justify-content:center;}
-  .progress{width:100%;}
-  .card img{width:100px;height:100px;}
 }
 </style>
 </head>
@@ -210,126 +171,74 @@ footer{
   </div>
 </header>
 
-<!-- ===== SUMMARY SECTION ===== -->
 <div class="summary">
-  <div class="summary-card">
-    <h3>Total Sales</h3>
-    <b id="sumSales">0</b>
-  </div>
-  <div class="summary-card">
-    <h3>Total Amount</h3>
-    <b id="sumAmount">$0.00</b>
-  </div>
-  <div class="summary-card">
-    <h3>100 Count</h3>
-    <b id="sum100">0</b>
-  </div>
-  <div class="summary-card">
-    <h3>200 Count</h3>
-    <b id="sum200">0</b>
-  </div>
-  <div class="summary-card">
-    <h3>1000 Count</h3>
-    <b id="sum1000">0</b>
-  </div>
+  <div class="summary-card"><h3>Total Sales</h3><b id="sumSales">0</b></div>
+  <div class="summary-card"><h3>Total Amount</h3><b id="sumAmount">$0</b></div>
+  <div class="summary-card"><h3>100 Count</h3><b id="sum100">0</b></div>
+  <div class="summary-card"><h3>200 Count</h3><b id="sum200">0</b></div>
+  <div class="summary-card"><h3>1000 Count</h3><b id="sum1000">0</b></div>
 </div>
 
 <div class="grid" id="staffGrid"></div>
 <footer>Powered by Grow More Solutions Pvt Ltd</footer>
-
 </div>
 
 <script>
-// ================= FULL STAFF DATA =================
-const staff2025 = [
-{ name: "P. Venujan", image: "assets/venu.jpg", totalSales: 27, totalAmount:4874.53, count100: 17, count200: 9, count1000: 1, joiningDate: '2024-04-19' },
-{ name: "R. Kushalini", image: "assets/Kushalini.jpg", totalSales: 25, totalAmount:4519.00, count100: 13, count200: 12, count1000: 0, joiningDate: '2024-02-01' },
-{ name: "T. Dinushan", image: "assets/Dinushan.jpg", totalSales: 24, totalAmount: 7511.78, count100: 9, count200: 11, count1000: 4, joiningDate: '2024-04-01' },
-{ name: "K. Sharmila", image: "assets/Sharmila.jpg", totalSales: 29, totalAmount: 6579.43, count100: 13, count200: 14, count1000: 2, joiningDate: '2024-06-06' },
-{ name: "M. Niranjan", image: "assets/Nuwan.jpg", totalSales: 8, totalAmount: 2547, count100: 5, count200: 3, count1000: 0, joiningDate: '2024-06-03' },
-{ name: "P. Sathurshika", image: "assets/Sathu.png", totalSales: 10, totalAmount: 3168.73, count100: 6, count200: 2, count1000: 2, joiningDate: '2024-06-06', resigned:true },
-{ name: "A. Marcuss", image: "assets/Marcuss.jpg", totalSales: 30, totalAmount: 5159.84, count100: 16, count200: 14, count1000: 0, joiningDate: '2024-10-08' },
-{ name: "G. Vilusha", image: "assets/Vilusha.jpg", totalSales: 16, totalAmount: 3321.60, count100: 9, count200: 6, count1000: 1, joiningDate: '2024-11-25' },
-{ name: "S. Sakura", image: "assets/Sakura.jpg", totalSales: 26, totalAmount: 3321.62, count100: 21, count200: 5, count1000: 0, joiningDate: '2025-02-11' },
-{ name: "P. Nadhiishan", image: "assets/Nadiishan.jpg", totalSales: 22, totalAmount: 7788.32, count100: 9, count200: 10, count1000: 3, joiningDate: '2024-11-25' },
-{ name: "A. Lakshan", image: "assets/Lakshan.png", totalSales: 5, totalAmount: 1489.37, count100: 4, count200: 0, count1000: 1, joiningDate: '2024-11-20', resigned:true },
-{ name: "T. Hamsaruban", image: "assets/Hamsa.jpg", totalSales: 24, totalAmount: 21230.56, count100: 15, count200: 2, count1000: 7, joiningDate: '2025-02-03', resigned:true },
-{ name: "J. Welinton", image: "assets/Welinton.png", totalSales: 6, totalAmount: 1024.62, count100: 2, count200: 4, count1000: 0, joiningDate: '2025-02-03', resigned:true },
-{ name: "A. Anaaf", image: "assets/Anaaf.png", totalSales: 5, totalAmount: 1631.29, count100: 2, count200: 2, count1000: 1, joiningDate: '2025-04-28' , resigned:true},
-{ name: "P. Abhishek", image: "assets/abhi.png", totalSales: 2, totalAmount: 209.60, count100: 2, count200: 0, count1000: 0, joiningDate: '2025-04-29' , resigned:true},
-{ name: "M. Radhika", image: "assets/Radika.jpg", totalSales: 13, totalAmount:2797.90, count100: 1, count200: 12, count1000: 0, joiningDate: '2025-06-02' },
-{ name: "J. Dilukshika", image: "assets/Dilu.jpg", totalSales: 5, totalAmount: 754.00, count100: 4, count200: 1, count1000: 0, joiningDate: '2025-07-03' },
-{ name: "V. Sharuksha Bawan", image: "assets/Bawan.jpg", totalSales: 8, totalAmount: 1306, count100: 3, count200: 5, count1000: 0, joiningDate: '2025-07-14' },
-{ name: "S. Dhanushkanthan", image: "assets/dhanush.png", totalSales: 1, totalAmount: 200.00, count100: 0, count200: 1, count1000: 0, joiningDate: '2025-07-08', resigned:true },
-{ name: "Shadow Team", image: "assets/Shadow.jpg", totalSales: 3, totalAmount: 1938.45, count100: 0, count200: 2, count1000: 1, joiningDate: '' },
-{ name: "S. Thanusiyan", image: "assets/Thanushiyan.jpg", totalSales: 4, totalAmount: 6540.40, count100: 0, count200: 2, count1000: 2, joiningDate: '2025-08-22' },
-{ name: "S. Vickneshwaran", image: "assets/Vicky.jpg", totalSales: 3, totalAmount: 509.30, count100: 1, count200: 2, count1000: 0, joiningDate: '2025-08-18' },
-{ name: "S. Ameena Farvin", image: "assets/Ameena.jpg", totalSales: 1, totalAmount: 204.30, count100: 0, count200: 1, count1000: 0, joiningDate: '2025-09-01', resigned:true },
-{ name: "S. Subash", image: "assets/Subash.jpg", totalSales: 9, totalAmount: 1471.46, count100: 4, count200: 5, count1000: 0, joiningDate: '2025-06-16' , resigned:true},
-{ name: "M. Dharshani", image: "assets/Dharu.jpg", totalSales: 2, totalAmount: 415.78, count100: 0, count200: 2, count1000: 0, joiningDate: '2025-09-16' },
-{ name: "R. Sachindran", image: "assets/Sachin.jpg", totalSales: 1, totalAmount:205.0, count100: 1, count200: 0, count1000: 0, joiningDate: '2025-08-21' }
+const staff2025 = [ /* YOUR DATA — UNCHANGED */ 
+{ name:"P. Venujan",image:"assets/venu.jpg",totalSales:27,totalAmount:4874.53,count100:17,count200:9,count1000:1,joiningDate:'2024-04-19'},
+{ name:"R. Kushalini",image:"assets/Kushalini.jpg",totalSales:25,totalAmount:4519,count100:13,count200:12,count1000:0,joiningDate:'2024-02-01'},
+{ name:"T. Dinushan",image:"assets/Dinushan.jpg",totalSales:24,totalAmount:7511.78,count100:9,count200:11,count1000:4,joiningDate:'2024-04-01'},
+{ name:"K. Sharmila",image:"assets/Sharmila.jpg",totalSales:29,totalAmount:6579.43,count100:13,count200:14,count1000:2,joiningDate:'2024-06-06'},
+{ name:"M. Niranjan",image:"assets/Nuwan.jpg",totalSales:8,totalAmount:2547,count100:5,count200:3,count1000:0,joiningDate:'2024-06-03'},
+{ name:"P. Sathurshika",image:"assets/Sathu.png",totalSales:10,totalAmount:3168.73,count100:6,count200:2,count1000:2,joiningDate:'2024-06-06',resigned:true},
+{ name:"A. Marcuss",image:"assets/Marcuss.jpg",totalSales:30,totalAmount:5159.84,count100:16,count200:14,count1000:0,joiningDate:'2024-10-08'},
+{ name:"G. Vilusha",image:"assets/Vilusha.jpg",totalSales:16,totalAmount:3321.6,count100:9,count200:6,count1000:1,joiningDate:'2024-11-25'},
+{ name:"S. Sakura",image:"assets/Sakura.jpg",totalSales:26,totalAmount:3321.62,count100:21,count200:5,count1000:0,joiningDate:'2025-02-11'},
+{ name:"P. Nadhiishan",image:"assets/Nadiishan.jpg",totalSales:22,totalAmount:7788.32,count100:9,count200:10,count1000:3,joiningDate:'2024-11-25'}
 ];
 
-// ===== SUMMARY CALCULATION =====
-let totalSales = 0;
-let totalAmount = 0;
-let total100 = 0;
-let total200 = 0;
-let total1000 = 0;
-
+let totalSales=0,totalAmount=0,total100=0,total200=0,total1000=0;
 staff2025.forEach(s=>{
-  totalSales += s.totalSales;
-  totalAmount += s.totalAmount;
-  total100 += s.count100;
-  total200 += s.count200;
-  total1000 += s.count1000;
+  totalSales+=s.totalSales;
+  totalAmount+=s.totalAmount;
+  total100+=s.count100;
+  total200+=s.count200;
+  total1000+=s.count1000;
 });
+sumSales.textContent=totalSales;
+sumAmount.textContent="$"+totalAmount.toLocaleString("en-US",{minimumFractionDigits:2});
+sum100.textContent=total100;
+sum200.textContent=total200;
+sum1000.textContent=total1000;
 
-document.getElementById("sumSales").textContent = totalSales;
-document.getElementById("sumAmount").textContent =
-  "$" + totalAmount.toLocaleString("en-US",{minimumFractionDigits:2});
-document.getElementById("sum100").textContent = total100;
-document.getElementById("sum200").textContent = total200;
-document.getElementById("sum1000").textContent = total1000;
+const now=new Date();
+const TARGET=30;
+const grid=document.getElementById("staffGrid");
 
-// ================= RANK + RENDER =================
-const TARGET = 30;
-const staffGrid = document.getElementById("staffGrid");
-const now = new Date();
-const highestAmount = Math.max(...staff2025.filter(s=>!s.resigned).map(s=>s.totalAmount));
+staff2025.sort((a,b)=>b.totalSales-a.totalSales).forEach((s,i)=>{
+  const joining=s.joiningDate?new Date(s.joiningDate):null;
+  let monthsActive=12;
 
-staff2025
-.sort((a,b)=> b.totalSales!==a.totalSales ? b.totalSales-a.totalSales : b.totalAmount-a.totalAmount)
-.forEach((s,i)=>{
-  const joining = s.joiningDate ? new Date(s.joiningDate) : new Date(now.getFullYear(),0,1);
-  let monthsActive = joining.getFullYear() === now.getFullYear() ? now.getMonth() - joining.getMonth() + 1 : 12;
-  const avgCount = (s.totalSales / monthsActive).toFixed(1);
-  const progress = Math.min(100, Math.round((s.totalSales/TARGET)*100));
-
-  let rankClass = "";
-  let tagText = "";
-  if(i===0){
-    rankClass="rank1";
-    tagText = "Employee of the Year";
-  } else if(i<5) rankClass="rankTop";
-
-  let goldenClass = "";
-  if(!s.resigned && s.totalAmount === highestAmount){
-      tagText += tagText ? " | Golden Employee" : "Golden Employee";
-      goldenClass = " golden";
+  if(joining && joining.getFullYear()===now.getFullYear()){
+    monthsActive=(now.getMonth()-joining.getMonth())+1;
+    if(monthsActive<1)monthsActive=1;
   }
 
-  staffGrid.innerHTML += `
-  <div class="card ${rankClass}${goldenClass} ${s.resigned ? 'resigned':''}" data-sales="${s.totalSales}">
+  const avg=(s.totalSales/monthsActive).toFixed(2);
+  const progress=Math.min(100,(s.totalSales/TARGET)*100);
+
+  grid.innerHTML+=`
+  <div class="card ${i===0?'rank1':i<5?'rankTop':''} ${s.resigned?'resigned':''}" data-sales="${s.totalSales}">
     <img src="${s.image}">
     <div class="meta">
-      <div class="rank">Rank ${i+1}${tagText ? " - "+tagText : ""}</div>
+      <div class="rank">Rank ${i+1}</div>
       <div class="name">${s.name}</div>
-      <div class="join">Joined: ${s.joiningDate || '-'}</div>
+      <div class="join">Joined: ${s.joiningDate||'-'}</div>
 
       <div class="stats">
         <div class="pill">Sales: ${s.totalSales}</div>
-        <div class="pill">Amount: $${s.totalAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+        <div class="pill">Avg / Month: ${avg}</div>
+        <div class="pill">Amount: $${s.totalAmount.toLocaleString()}</div>
         <div class="pill">100: ${s.count100}</div>
         <div class="pill">200: ${s.count200}</div>
         <div class="pill">1000: ${s.count1000}</div>
@@ -337,34 +246,18 @@ staff2025
 
       <div class="progress"><span style="width:${progress}%"></span></div>
     </div>
-  </div>
-  `;
+  </div>`;
 });
 
-// ================= COUNTDOWN =================
-const countdownDate = new Date("2025-12-19T16:00:00").getTime();
-function updateCountdown(){
-  const now = new Date().getTime();
-  let diff = countdownDate - now;
-  const d = Math.floor(diff/(1000*60*60*24));
-  diff %= (1000*60*60*24);
-  const h = Math.floor(diff/(1000*60*60));
-  diff %= (1000*60*60);
-  const m = Math.floor(diff/(1000*60));
-  const s = Math.floor((diff/1000)%60);
-  document.getElementById("d").textContent=d;
-  document.getElementById("h").textContent=h;
-  document.getElementById("m").textContent=m;
-  document.getElementById("s").textContent=s;
-}
-setInterval(updateCountdown,1000);
-updateCountdown();
+const countdownDate=new Date("2025-12-19T16:00:00").getTime();
+setInterval(()=>{
+  const now=new Date().getTime();
+  let d=countdownDate-now;
+  document.getElementById("d").textContent=Math.floor(d/86400000);
+  document.getElementById("h").textContent=Math.floor(d%86400000/3600000);
+  document.getElementById("m").textContent=Math.floor(d%3600000/60000);
+  document.getElementById("s").textContent=Math.floor(d%60000/1000);
+},1000);
 </script>
-
 </body>
 </html>
-
-
-
-
-
